@@ -33,16 +33,35 @@ These operations are all performed on 32-bit unsigned integers, and include logi
     Σ₀, Σ₁, σ₀, and σ₁ – represent rotation and shift functions defined in the standard, using right-rotate (ROTR) and right-shift (SHR) operations.
 
 How Problem 1 works.
-   1. Bitwise operations (^, &, ~) are used to manipulate binary words at the bit level.
+1. Bitwise operations (^, &, ~) are used to manipulate binary words at the bit level.
 
-   2. NumPy’s uint32 type ensures that all operations stay within 32-bit boundaries, matching cryptographic specifications.
+2. NumPy’s uint32 type ensures that all operations stay within 32-bit boundaries, matching cryptographic specifications.
 
-   3. Helper functions such as ROTR (rotate right) and SHR (shift right) are reused across multiple parts of the algorithm to create the Σ and σ functions.
+3. Helper functions such as ROTR (rotate right) and SHR (shift right) are reused across multiple parts of the algorithm to create the Σ and σ functions.
 
+Problem 2: Generating and Verifying SHA-256 Constants.
+This problem focuses on creating and validating the 64 constants (K values) used in the SHA-256 hashing algorithm.
+These constants are calculated from the fractional parts of the cube roots of the first 64 prime numbers, as defined in the NIST Secure Hash Standard (FIPS PUB 180-4).
 
+How Problem 2 works:
 
+1. Prime Generation: The first 64 prime numbers are calculated (2, 3, 5, 7, 11, …).
 
+2. Constant Calculation: For each prime p, the cube root is taken, the fractional part is multiplied by 2³², and then converted into a  32-bit unsigned integer.
 
+3. Display Function: The constants are printed neatly, 8 per row, for example:
+    K[00]=0x428a2f98  K[01]=0x71374491  K[02]=0xb5c0fbcf ...
+
+4. Verification Function: The generated constants are compared against the official constants from the Secure Hash Standard (FIPS 180-4).
+    If everything matches, the output confirms:
+    All 64 SHA-256 constants match the official FIPS 180-4 values.
+
+How to test Problem 2:
+    To test the output, run the following in your notebook:
+        display_sha256_constants()
+        verify_sha256_constants()
+    Expected output:
+        All 64 SHA-256 constants match the official FIPS 180-4 values.
 
 
    REFERENCES:
