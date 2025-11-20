@@ -63,6 +63,26 @@ How to test Problem 2:
     Expected output:
         All 64 SHA-256 constants match the official FIPS 180-4 values.
 
+Problem 3: Message Padding and Parsing.
+This problem focuses on preparing a message for SHA-256 processing by applying padding and splitting it into 512-bit blocks, following the rules defined in the NIST Secure Hash Standard (FIPS PUB 180-4, §5.1.1–§5.2.1).
+
+How Problem 3 works:
+1. The original message length (ℓ) is calculated in bits using message_length_bits().
+2. A single '1' bit (0x80) is appended, followed by enough '0' bits to make the total length congruent to 448 mod 512.
+3. The 64-bit big-endian representation of the original message length (ℓ) is added to the end of the padded message.
+4. The fully padded message is split into 512-bit (64-byte) blocks using a generator function block_parse(msg),
+   which yields each block as a separate bytes object for further processing.
+
+How to test Problem 3:
+    Example test:
+    msg = b"abc"
+    for i, block in enumerate(block_parse(msg), start=1):
+        print(f"Block {i} ({len(block)} bytes): {block.hex()}")
+    
+    Expected output:
+    Original message: b'abc'
+    Generated 512-bit blocks:
+    Block 1 (64 bytes): 61626380000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000018
 
    REFERENCES:
    1. National Institute of Standards and Technology. Secure Hash Standard (SHS), FIPS PUB 180-4 (2015), §4.1.2–§4.1.3, pp. 10–11.
