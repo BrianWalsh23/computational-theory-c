@@ -84,6 +84,46 @@ How to test Problem 3:
     Generated 512-bit blocks:
     Block 1 (64 bytes): 61626380000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000018
 
+Problem 4: SHA-256 Hash Computation
+
+Problem 4 focuses on implementing the full SHA-256 compression process for a single 512-bit block, following the algorithm defined in the Secure Hash Standard (FIPS PUB 180-4, §6.2.2).
+This is the core of the SHA-256 hashing algorithm, where the message schedule, logical functions, and constants all combine to update the intermediate hash stat
+
+1. Message Schedule W[0..63] (4.1)
+    The 512-bit block is split into 16 words, then expanded to 64 using:
+    W[t] = W[t−16] + σ₀(W[t−15]) + W[t−7] + σ₁(W[t−2]) (mod 2³²).
+    This prepares all words needed for the 64 rounds.
+2.  Initialising Working Variables (4.2)
+    The eight hash values H₀–H₇ are copied into variables a–h,
+    which will be updated throughout the compression rounds.
+3. The 64 Compression Rounds (4.3)
+    Each round computes:
+    T1 = h + Σ₁(e) + Ch(e,f,g) + K[t] + W[t]
+    T2 = Σ₀(a) + Maj(a,b,c)
+    Then the variables a–h are rotated and updated as defined in FIPS 180-4.
+4. Updating the Hash State (4.4)
+    After 64 rounds, the updated variables are added back to H₀–H₇:
+    H[i] = H[i] + variable[i] (mod 2³²).
+    This produces the new hash state for the next block.
+
+How to Test Problem 4:
+    Example Test:
+    test_block = block_parse(b"abc").__next__()
+
+    H0 = np.array([
+        U32(0x6a09e667), U32(0xbb67ae85), U32(0x3c6ef372), U32(0xa54ff53a),
+     U32(0x510e527f), U32(0x9b05688c), U32(0x1f83d9ab), U32(0x5be0cd19)
+    ], dtype=U32)
+
+    H1 = hash(H0, test_block)
+
+    print([hex(int(x)) for x in H1])
+
+    Expected output:
+    ['0xba7816bf', '0x8f01cfea', '0x414140de', '0x5dae2223',
+     '0xb00361a3', '0x96177a9c', '0xb410ff61', '0xf20015ad']
+
+
    REFERENCES:
    1. National Institute of Standards and Technology. Secure Hash Standard (SHS), FIPS PUB 180-4 (2015), §4.1.2–§4.1.3, pp. 10–11.
     https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf
