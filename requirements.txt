@@ -1,0 +1,3 @@
+# SHA-256 Coursework Dependencies
+numpy>=1.24.0
+jupyter>=1.0.0
