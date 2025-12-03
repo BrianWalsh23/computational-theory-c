@@ -1,21 +1,28 @@
-HOW TO RUN THE PROJECT:
-1. Open the notebook file problems.ipynb
-2. Ensure numpy is installed. Use " pip install numpy " in the terminal
-3. Select Python kernel (.venv (Python 3.x)).
-4. Click Run All.
-5. The output will show binary values for each operation, for example:
-    x = np.uint32(0b11110000)
-    y = np.uint32(0b10101010)
-    z = np.uint32(0b01010101)
+## Installation
 
-    print(bin(int(Parity(x, y, z))))  # Output: 0b10011111
+1. Make sure you have Python 3.x installed.
+2. Install the required packages using:
+
+       pip install -r requirements.txt
+
+## How to Run the Project
+
+1. Open the notebook file `problems.ipynb`.
+2. Select the Python kernel you installed the requirements into (e.g. `.venv (Python 3.x)`).
+3. Click **Run All**.
+4. The output will show binary values for each operation, for example:
+       x = np.uint32(0b11110000)
+       y = np.uint32(0b10101010)
+       z = np.uint32(0b01010101)
+
+       print(bin(int(Parity(x, y, z))))  # Output: 0b10011111
 
 TESTING:
 Each function can be tested using simple binary inputs or random 32-bit values.
 For example:
-    x = np.uint32(0b11110000)
-    y = np.uint32(0b10101010)
-    z = np.uint32(0b01010101)
+      x = np.uint32(0b11110000)
+      y = np.uint32(0b10101010)
+      z = np.uint32(0b01010101)
 
     print("Parity:", bin(int(Parity(x, y, z))))
     print("Ch:", bin(int(Ch(x, y, z))))
