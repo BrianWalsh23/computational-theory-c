@@ -35,11 +35,11 @@ For example:
 Focuses on implementing and understanding the binary operations that form the mathematical foundation of the SHA-256 hashing algorithm, as defined in the NIST Secure Hash Standard (FIPS PUB 180-4).
 These operations are all performed on 32-bit unsigned integers, and include logical and bitwise transformations such as:
 
-    - Parity(x, y, z) – returns 1 if an odd number of input bits are 1.
-    - Ch(x, y, z) – chooses bits from y or z based on x 
+- Parity(x, y, z) – returns 1 if an odd number of input bits are 1.
+- Ch(x, y, z) – chooses bits from y or z based on x 
       (the "choose"  function).
-    - Maj(x, y, z) – returns the majority bit among the three inputs.
-    - Σ₀, Σ₁, σ₀, and σ₁ – represent rotation and shift functions defined 
+- Maj(x, y, z) – returns the majority bit among the three inputs.
+- Σ₀, Σ₁, σ₀, and σ₁ – represent rotation and shift functions defined 
       in the standard, using right-rotate (ROTR) and right-shift (SHR) operations.
 ### How Problem 1 works
 1. Bitwise operations (^, &, ~) are used to manipulate binary words at the bit level.
